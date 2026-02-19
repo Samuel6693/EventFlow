@@ -42,10 +42,10 @@ GROUP BY e.id, e.title, e.max_tickets;
 
 --Ekonomisk rapport:
 SELECT
-  e.id                AS event_id,
-  e.title             AS event_title,
+  e.id                    AS event_id,
+  e.title                 AS event_title,
   e.price,
-  COUNT(t.id)         AS sold_tickets,
+  COUNT(t.id)             AS sold_tickets,
   (COUNT(t.id) * e.price) AS total_revenue
 FROM event e
 LEFT JOIN event_order eo ON eo.event_id = e.id
@@ -53,4 +53,15 @@ LEFT JOIN tickets t      ON t.order_id = eo.id
 WHERE e.id = 1
 GROUP BY e.id, e.title, e.price;
 
-
+-- Event där totala biljettintäkter överstiger host_fee
+SELECT
+  e.id                  AS event_id,
+  e.title               AS event_title,
+  e.host_fee, 
+  COUNT(t.id)           AS sold_tickets,
+  COUNT(t.id) * e.price AS total_revenue
+FROM event e
+LEFT JOIN event_order eo ON eo.event_id = e.id
+LEFT JOIN tickets t      ON t.order_id = eo.id
+GROUP BY e.id, e.title, e.host_fee, e.price
+HAVING COUNT(t.id) * e.price > e.host_fee; 

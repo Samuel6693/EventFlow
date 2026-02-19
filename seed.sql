@@ -12,6 +12,15 @@ INSERT INTO event (title, starts_at, price, max_tickets) VALUES
   ('Teater: Vinterljus', now() + interval '30 days', 180.00, 80),
   ('Öppet Hus',          now() + interval '40 days', 100.00, 60);
 
+UPDATE event
+SET host_fee = CASE title
+  WHEN 'Lokala Derbyt' THEN 1000.00
+  WHEN 'Kulturkväll Live' THEN 1200.00
+  WHEN 'Teater: Vinterljus' THEN 500.00
+  WHEN 'Öppet Hus' THEN 800.00
+  ELSE 0
+END;
+
 -- ORDERS (id blir 1..4 efter TRUNCATE RESTART IDENTITY)
 INSERT INTO event_order (user_id, event_id) VALUES (1, 1);
 INSERT INTO event_order (user_id, event_id) VALUES (2, 2);

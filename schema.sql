@@ -16,6 +16,13 @@ CREATE TABLE event (
   created_at    TIMESTAMP NOT NULL DEFAULT now()
 );
 
+-- Host fee lades till i efterhand
+ALTER TABLE event
+ADD COLUMN host_fee NUMERIC(10,2);
+
+ALTER TABLE event
+ADD CONSTRAINT event_host_fee_check CHECK (host_fee >= 0);
+
 -- EVENT ORDER
 CREATE TABLE event_order (
   id          SERIAL PRIMARY KEY,

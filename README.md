@@ -46,6 +46,9 @@ Skriv frågor som löser följande krav från kunden:
   - Total intäkt (`total_revenue`)
 - Krav: Även event som inte har sålt någon biljett ska visas i vyn (med `0` som värde).
 
+## 4. Utökning: host_fee
+Utöka tabellen `event` med kolumnen `host_fee`. Skapa sedan en sökning som listar de event där de totala biljettintäkterna överstiger denna avgift.
+
 ## Examinationskriterier för Godkänt (G)
 - Databasdesign: En ER-modell som visar korrekt struktur och relationer.
 - Implementering: Tabeller är korrekt skapade med rätt datatyper, `PRIMARY KEY` och `FOREIGN KEY`.
